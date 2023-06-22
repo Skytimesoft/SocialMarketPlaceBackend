@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Livewire\Admin\UserList;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/users', [UserController::class, 'index'])->name('admin.user.list');
+    Route::get('/users', UserList::class)->name('admin.user.list');
     Route::get('/sellers', [SellerController::class, 'index'])->name('admin.seller.list');
 });
 
