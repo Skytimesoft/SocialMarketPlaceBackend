@@ -7,7 +7,11 @@
             </h2>
         </div>
     </div>
-    <div class="page-body p-3">
-        <livewire:user-table />
+    <div class="page-body px-3">
+        <div class="card">
+            <div class="card-body">
+                <livewire:user-table />
+            </div>
+        </div>
     </div>
 </div>

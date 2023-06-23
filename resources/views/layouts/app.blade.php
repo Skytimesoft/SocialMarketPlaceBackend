@@ -16,7 +16,7 @@
     @vite('public/dist/css/demo.min.css')
     @vite('public/dist/css/admin-template.css')
 
-    {{-- Default --}}
+    {{-- Core styles --}}
     @vite('resources/sass/app.scss')
 
     <!-- Custom styles for this Page-->
@@ -45,5 +45,9 @@
     @yield('custom_scripts')
 
     @livewireScripts
+    <script type="module">
+        import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+    @vite('public/dist/js/livewire-turbolinks.js')
 </body>
 </html>

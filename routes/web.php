@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\Admin\UserList;
+use App\Http\Livewire\Admin\UserView;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Livewire\Admin\UserList;
+use App\Http\Livewire\Admin\Profile as AdminProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,15 +35,18 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
+    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+
+    // Buyers routes
     Route::get('/users', UserList::class)->name('admin.user.list');
+    Route::get('/user/view/{id}', UserView::class)->name('admin.user.view');
+
+    // Sellers routes
     Route::get('/sellers', [SellerController::class, 'index'])->name('admin.seller.list');
-});
 
-
-// Common
-Route::middleware('auth')->group(function () {
-    Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile', AdminProfile::class)->name('admin.profile');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
+
+
