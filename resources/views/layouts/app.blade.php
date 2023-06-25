@@ -18,12 +18,14 @@
 
     {{-- Core styles --}}
     @vite('resources/sass/app.scss')
+    @livewireStyles
 
     <!-- Custom styles for this Page-->
     @yield('custom_styles')
 
-    @livewireStyles
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
+
 <body class="theme-light">
     <div class="page">
         {{-- Page Sidebar --}}
@@ -41,13 +43,13 @@
     <!-- Core plugin JavaScript-->
     @vite('resources/js/app.js')
 
-    <!-- Page level custom scripts -->
-    @yield('custom_scripts')
-
     @livewireScripts
     <script type="module">
         import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
     </script>
     @vite('public/dist/js/livewire-turbolinks.js')
+
+    <!-- Page level custom scripts -->
+    @yield('custom_scripts')
 </body>
 </html>
