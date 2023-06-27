@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\RoleAndPermissionSeeder;
@@ -19,6 +21,15 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
 
         // for dev
-        User::factory(10)->create();
+        $users = User::factory(100)->create();
+        $roleArr = array("Buyer", "Seller");
+
+        foreach ($users as $user) {
+            $rand_key = array_rand($roleArr);
+            $user->assignRole($roleArr[$rand_key]);
+        }
+
+        Category::factory(20)->create();
+        SubCategory::factory(12)->create();
     }
 }

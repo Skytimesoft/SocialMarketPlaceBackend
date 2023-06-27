@@ -16,5 +16,5 @@
         </div>
     </div>
 
-    <livewire:user-delete-modal />
+    <livewire:admin.user-delete-modal />
 </div>

@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class UserList extends Component
 {
-    public $showUserDeleteModal = false;
-
     protected $listeners = [
         'openUserDeleteModal' => 'openUserDeleteModal',
         'refreshComponent' => 'refreshChildren'

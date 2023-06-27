@@ -27,8 +27,8 @@ class Profile extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     protected $messages = [
-        'email.required' => 'The Email Address cannot be empty.',
-        'email.email' => 'The Email Address format is not valid.',
+        'email.required' => 'The email address cannot be empty.',
+        'email.email' => 'The email address format is not valid.',
         'password.min:6' => 'The password should be minimum of 6 characters.',
         'password.same' => 'The passwords should match.',
     ];

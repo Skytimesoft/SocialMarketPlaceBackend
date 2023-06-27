@@ -195,6 +195,20 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item {{ Route::is('admin.seller.list') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.seller.list') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Seller Management
+                        </span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -237,24 +251,36 @@
                         </div>
                     </div>
                 </li> --}}
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ Route::is('admin.category.list') | Route::is('admin.subcategory.list') ? 'active' : '' }}">
                     <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-producthunt" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9BA4B5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 16v-8h2.5a2.5 2.5 0 1 1 0 5h-2.5" />
+                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Seller Management
+                            Product Management
                         </span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('admin.category.list') }}">
+                                    Categories
+                                </a>
+                        </div>
+                        <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('admin.subcategory.list') }}">
+                                    Subcategories
+                                </a>
+                        </div>
+                        <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
                                 <a class="dropdown-item" href="{{ route('admin.seller.list') }}">
-                                    Seller List
+                                    Products
                                 </a>
                         </div>
                     </div>

@@ -5,10 +5,14 @@ use App\Http\Livewire\Admin\UserList;
 use App\Http\Livewire\Admin\UserView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Dashboard;
+use App\Http\Livewire\Admin\SellerList;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SellerController;
+
+use App\Http\Livewire\Admin\Product\CategoryList;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Livewire\Admin\Product\SubCategoryList;
 use App\Http\Livewire\Admin\Profile as AdminProfile;
 
 /*
@@ -43,10 +47,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/user/view/{id}', UserView::class)->name('admin.user.view');
 
     // Sellers routes
-    Route::get('/sellers', [SellerController::class, 'index'])->name('admin.seller.list');
+    Route::get('/sellers', SellerList::class)->name('admin.seller.list');
+
+    // Products routes
+    Route::get('/categories', CategoryList::class)->name('admin.category.list');
+    Route::get('/subcategories', SubCategoryList::class)->name('admin.subcategory.list');
+
 
     Route::get('/profile', AdminProfile::class)->name('admin.profile');
-    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
 
 
