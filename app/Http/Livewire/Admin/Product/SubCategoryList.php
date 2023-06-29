@@ -73,11 +73,13 @@ class SubCategoryList extends Component
 
     public function openSubCategoryDeleteModal(SubCategory $subcategory)
     {
+        $this->alert = false;
         $this->emit('subCategoryDeleteModal', $subcategory);
     }
 
     public function openSubCategoryEditModal(SubCategory $subcategory)
     {
+        $this->alert = false;
         $this->emit('subCategoryEditModal', $subcategory, $this->categories);
     }
 

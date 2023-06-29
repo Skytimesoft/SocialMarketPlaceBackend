@@ -22,7 +22,9 @@ class CategoryDeleteModal extends Component
     public function updatedConfirmDelete()
     {
         if ($this->confirmDelete) {
+            $this->category->clearFootprints();
             $this->category->delete();
+
             $this->emitUp('refreshComponent');
         }
     }

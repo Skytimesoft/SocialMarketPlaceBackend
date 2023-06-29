@@ -4,39 +4,66 @@ namespace App\Http\Livewire\Admin\Product;
 
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\WithFileUploads;
 
 class CategoryNewModal extends Component
 {
+    use WithFileUploads;
+
+    public $class = "";
+
+    public $style = "display: none;";
+
     public Category $category;
 
-    protected $listeners = ['categoryNewModal' => 'categoryNewModal'];
+    public $logo = null;
+
+    protected $listeners = ['categoryNewModal' => 'showModal'];
 
     protected function rules()
     {
         return [
-            "category.name" => "required|max:190|unique:categories,name"
+            "category.name" => "required|string|max:190|unique:categories,name",
+            "logo" => "required|image|max:256",
         ];
     }
+
+    protected $messages = [
+        'logo.image' => 'File type must be image.',
+        'logo.max:256' => 'File size too large.',
+    ];
 
     public function mount()
     {
         $this->category = new Category;
     }
 
-    public function categoryNewModal()
+    public function showModal()
     {
-        $this->dispatchBrowserEvent('openNewModal');
+        $this->class = "show";
+        $this->style = "display: block;";
+    }
+
+    public function closeModal()
+    {
+        $this->class = "";
+        $this->style = "display: none;";
+        $this->logo = null;
+        $this->category = new Category;
+        $this->emitUp('refreshComponent');
     }
 
     public function create()
     {
-        $validatedData = $this->validate();
+        $this->validate();
 
-        $this->category->update($validatedData);
+        if ($this->logo) {
+            $fileName = $this->logo->store('/platforms', 'public');
+            $this->category->logo = $fileName;
+        }
+
         $this->category->save();
-        $this->category = new Category;
-
-        $this->emitUp('refreshComponent');
+        $this->closeModal();
     }
 
     public function render()

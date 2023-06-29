@@ -4,10 +4,10 @@
         <div class="page-header d-print-none">
             <div class="d-flex justify-content-between">
                 <h2 class="page-title">
-                    {{ __('Categories (Platform/Social Media)') }}
+                    {{ __('Products (Accounts)') }}
                 </h2>
-                <a wire:click="openNewCategoryModal" class="btn btn-primary w-20">
-                    Add New Category
+                <a href="{{ route('admin.product.create') }}" class="btn btn-primary w-20">
+                    Upload New
                 </a>
             </div>
         </div>
@@ -16,12 +16,10 @@
     <div class="page-body px-3">
         <div class="card">
             <div class="card-body">
-                <livewire:category-table />
+                <livewire:product-table />
             </div>
         </div>
     </div>
 
-    <livewire:admin.product.category-new-modal />
-    <livewire:admin.product.category-edit-modal />
     <livewire:admin.product.category-delete-modal />
 </div>
