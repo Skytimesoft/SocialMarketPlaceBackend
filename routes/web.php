@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\Seller\SellerView;
 use App\Http\Livewire\Admin\Site\LinkStorage;
 use App\Http\Livewire\Admin\Site\OptimizeApplication;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     // Sellers routes
     Route::get('/sellers', SellerList::class)->name('admin.seller.list');
+    Route::get('/seller/view/{id}', SellerView::class)->name('admin.seller.view');
 
     // Products routes
     Route::get('/categories', CategoryList::class)->name('admin.category.list');
