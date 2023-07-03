@@ -20,5 +20,5 @@
         </div>
     </div>
 
-    <livewire:admin.product.category-delete-modal />
+    <livewire:admin.product.product-delete-modal />
 </div>

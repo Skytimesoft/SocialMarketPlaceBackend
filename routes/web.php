@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\Product\ProductEdit;
 use App\Http\Livewire\Admin\Seller\SellerView;
 use App\Http\Livewire\Admin\Site\LinkStorage;
 use App\Http\Livewire\Admin\Site\OptimizeApplication;
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/subcategories', SubCategoryList::class)->name('admin.subcategory.list');
     Route::get('/products', ProductList::class)->name('admin.product.list');
     Route::get('/product/new', ProductCreate::class)->name('admin.product.create');
+    Route::get('/product/edit/{id}', ProductEdit::class)->name('admin.product.edit');
 
     // Site Settings
     Route::get('/site-logo', Logo::class)->name('admin.site.logo');

@@ -59,9 +59,11 @@ class ProductCreate extends Component
     public function updatedProductCategoryId()
     {
         $this->isCategorySelected = false;
-        $this->subcategories = SubCategory::whereCategoryId($this->product->category_id)->pluck('name', 'id')->toArray();
-        $this->isCategorySelected = true;
 
+        $this->product->sub_category_id = null;
+        $this->subcategories = SubCategory::whereCategoryId($this->product->category_id)->pluck('name', 'id')->toArray();
+
+        $this->isCategorySelected = true;
     }
 
     public function createNewProduct()

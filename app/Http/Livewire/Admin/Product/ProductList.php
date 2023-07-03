@@ -8,7 +8,7 @@ use Livewire\Component;
 class ProductList extends Component
 {
     protected $listeners = [
-        'openUserDeleteModal' => 'openUserDeleteModal',
+        'openProductDeleteModal' => 'openProductDeleteModal',
         'refreshComponent' => 'refreshChildren'
     ];
 
@@ -17,7 +17,7 @@ class ProductList extends Component
         $this->emit('refreshChildren');
     }
 
-    public function openUserDeleteModal(Product $product)
+    public function openProductDeleteModal(Product $product)
     {
         $this->emit('productDeleteModal', $product);
     }

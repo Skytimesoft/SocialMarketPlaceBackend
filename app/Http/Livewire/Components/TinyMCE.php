@@ -8,13 +8,14 @@ class TinyMCE extends Component
 {
     public $inputName = '';
 
-    public $data;
+    public $data = '';
 
     public $emitEventName = null;
 
-    public function mount($inputName)
+    public function mount($inputName, $data = '')
     {
         $this->inputName = $inputName;
+        $this->data = $data;
         $this->emitEventName = $inputName . 'Data';
     }
 

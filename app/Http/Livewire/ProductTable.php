@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -54,9 +55,13 @@ class ProductTable extends DataTableComponent
             Column::make("ID", 'id')
                 ->hideIf(true),
             Column::make("Title", "title")
-                ->sortable()
-                ->searchable(),
-            Column::make("Stock Available", "stock"),
+                ->searchable()
+                ->format(
+                    function ($value, $row, Column $column) {
+                        return Str::limit($value, 40);
+                    }
+                ),
+            Column::make("Stock", "stock"),
             Column::make("Currency", "price_currency")
                 ->hideIf(true),
             Column::make("Price (per pc)", "price")
@@ -74,7 +79,8 @@ class ProductTable extends DataTableComponent
                         }
                     }
                 )
-                ->html(),
+                ->html()
+                ->searchable(),
             Column::make("Sub Category", "sub_category_id")
                 ->format(
                     function ($value, $row, Column $column) use ($subcategoryMap) {
@@ -85,7 +91,8 @@ class ProductTable extends DataTableComponent
                         return '<p class="small">N/A</p>';
                     }
                 )
-                ->html(),
+                ->html()
+                ->searchable(),
             Column::make("Owner", "owner_id")
                 ->format(
                     function ($value, $row, Column $column) use ($userNameMap) {
@@ -94,13 +101,14 @@ class ProductTable extends DataTableComponent
                         }
                     }
                 )
-                ->html(),
+                ->html()
+                ->searchable(),
             Column::make('Actions')
                 ->label(
                     function ($row, Column $column) {
-                        $edit = '<a href="' . route('admin.user.view', ['id' => $row->id]) . '" class="btn btn-primary  btn-icon me-1" aria-label="Edit User"> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/> <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></svg> </a>';
+                        $edit = '<a href="' . route('admin.product.edit', ['id' => $row->id]) . '" class="btn btn-primary  btn-icon me-1" aria-label="Edit User"> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/> <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/> <path d="M16 5l3 3"/> </svg> </a>';
 
-                        $delete = '<a wire:click="openUserDeleteModal(' . $row->id . ')" class="btn btn-danger w-20 btn-icon" aria-label="Delete User"> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M4 7l16 0"/> <path d="M10 11l0 6"/> <path d="M14 11l0 6"/> <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/> <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/></svg> </a>';
+                        $delete = '<a wire:click="openProductDeleteModal(' . $row->id . ')" class="btn btn-danger w-20 btn-icon" aria-label="Delete User"> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M4 7l16 0"/> <path d="M10 11l0 6"/> <path d="M14 11l0 6"/> <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/> <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/></svg> </a>';
 
                         return $edit . $delete;
                     }
@@ -111,8 +119,6 @@ class ProductTable extends DataTableComponent
     public function builder(): Builder
     {
         return Product::query()
-            ->orderBy('created_at', 'desc')
-            ->when($this->columnSearch['name'] ?? null, fn($query, $name) => $query->where('users.name', 'like', '%' . $name . '%'))
-            ->when($this->columnSearch['email'] ?? null, fn($query, $email) => $query->where('users.email', 'like', '%' . $email . '%'));
+            ->orderBy('created_at', 'desc');
     }
 }
