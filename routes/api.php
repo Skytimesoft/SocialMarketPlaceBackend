@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/register', [AuthController::class, 'createUser']);
+Route::post('/login', [AuthController::class, 'loginUser']);
+
+// Buyer
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], function () {
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::get('/sign-out', [AuthController::class, 'signOut']);
+
+    Route::get('/language', [ProfileController::class, 'currentLanguage']);
+    Route::put('/language', [ProfileController::class, 'updateLanguage']);
 });
+
+
+
+
+
+
+
+
