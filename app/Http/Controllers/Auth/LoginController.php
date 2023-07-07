@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -48,16 +50,25 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasRole('Buyer')) {
+        /* if ($user->hasRole('Buyer')) {
             $this->redirectTo = RouteServiceProvider::BUYER_HOME;
         }
 
         if ($user->hasRole('Seller')) {
             $this->redirectTo = RouteServiceProvider::SELLER_HOME;
-        }
+        } */
 
         if ($user->hasRole('Admin')) {
             $this->redirectTo = RouteServiceProvider::ADMIN_HOME;
         }
+
+        if (!$user->hasVerifiedEmail()) {
+            return to_route('verification.notice');
+        }
+
+        Session::flush();
+        Auth::logout();
+
+        return redirect('/');
     }
 }

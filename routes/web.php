@@ -41,7 +41,12 @@ Route::get('/', function () {
 
 // Auth
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [HomeController::class, 'home'])->name('home');
+    Route::get('/email/verify', [HomeController::class, 'verifyNotice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [HomeController::class, 'handleVerification'])->name('verification.verify')->middleware(['signed']);
+    Route::post('/email/verify/resend', [HomeController::class, 'verifyResend'])->name('verification.resend')->middleware(['throttle:6,1']);
+});
 
 
 // Admin
