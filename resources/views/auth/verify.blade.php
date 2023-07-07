@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default-app')
 
 @section('content')
     <div class="page-body">
@@ -18,14 +18,16 @@
                 </div>
                 <div class="card-body">
                     <p>{{ __('Before proceeding, please check your email for a verification link.') }}</p>
-                    
-                    {{ __('If you did not receive the email') }},
 
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-
-                        <button type="submit" class="btn btn-primary">{{ __('click here to request another') }}</button>
-                    </form>
+                    <div class="mt-4">
+                        <p class="m-1">
+                            {{ __('If you did not receive the email') }},
+                        </p>
+                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">{{ __('click here to request another') }}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

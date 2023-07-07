@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 @php
-    $tinyAPI = 'uc9b1k085jrjgyagl8e83rrphmz0jq86smq07d62p0etiw6c';
+    $tinyAPI = 'x6n0kjoezjwiuijiwf6apus1qjlj7mkalr87v5lbxy6ma0fi';
 @endphp
 
 <head>
