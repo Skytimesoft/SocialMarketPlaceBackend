@@ -35,7 +35,7 @@ use App\Http\Livewire\Admin\Profile as AdminProfile;
 
 // Public
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
