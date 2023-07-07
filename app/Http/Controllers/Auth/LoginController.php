@@ -62,13 +62,6 @@ class LoginController extends Controller
             $this->redirectTo = RouteServiceProvider::ADMIN_HOME;
         }
 
-        if (!$user->hasVerifiedEmail()) {
-            return to_route('verification.notice');
-        }
-
-        Session::flush();
-        Auth::logout();
-
-        return redirect('/');
+        $this->redirectTo = '/home';
     }
 }
