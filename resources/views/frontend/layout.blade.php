@@ -138,15 +138,32 @@
                     signUpDialougOpen: false,
                     token: token,
                     signup: {
+                        name: '',
                         email: '',
                         password: '',
-                        confirm_password: '',
+                        password_confirmation: '',
+                        user_type: 'Buyer',
                     },
                     toggleSignUp() {
                         this.signUpDialougOpen = ! this.signUpDialougOpen 
                     },
                     handleLogin() {
-                        console.log(this.signup);
+                        // console.log(JSON.stringify(this.signup));
+                        const response = fetch(`{{ url('/api/register') }}`, {
+                            method: "POST", // *GET, POST, PUT, DELETE, etc.
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(this.signup), // body data type must match "Content-Type" header
+                        }).then(res => res.json())
+                        .then(result => {
+                            if (result?.data?.access_token) {
+                                localStorage.setItem('d-user-token', result?.data?.access_token)
+                                localStorage.setItem('d-user-info', result?.data?.user)
+                                location.href = `{{ url('/user') }}`
+                            }
+                        })
+
                     },
                 }))
             })

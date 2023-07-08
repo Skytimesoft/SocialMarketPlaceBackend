@@ -12,6 +12,10 @@
             </div>
             <form class="p-4 grid gap-4" x-on:submit.prevent="handleLogin">
                 <label class="flex items-center gap-2">
+                    <span class="w-[150px]">Name:</span>
+                    <input type="text" name="name" x-model="signup.name" class="py-1 flex-1" required />
+                </label>
+                <label class="flex items-center gap-2">
                     <span class="w-[150px]">Email:</span>
                     <input type="email" name="email" x-model="signup.email" class="py-1 flex-1" required />
                 </label>
@@ -21,7 +25,20 @@
                 </label>
                 <label class="flex items-center gap-2">
                     <span class="w-[150px]">Confirm password:</span>
-                    <input type="password" name="password" x-model="signup.confirm_password" class="py-1 flex-1" required />
+                    <input type="password" name="password_confirmation" x-model="signup.password_confirmation" class="py-1 flex-1" required />
+                </label>
+                <label class="flex items-center gap-2">
+                    <span class="w-[150px]">User Type:</span>
+                    <div class="flex gap-2 items-center">
+                        <div class="flex items-center gap-2">
+                            <input id="default-radio-1" type="radio" x-model="signup.user_type" value="Buyer" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300">
+                            <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buyer</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input checked id="default-radio-2" type="radio" x-model="signup.user_type" value="Seller" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300">
+                            <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Seller</label>
+                        </div>
+                    </div>
                 </label>
                 <label class="flex items-center gap-2">
                     <input type="checkbox" required>

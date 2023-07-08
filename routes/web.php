@@ -38,6 +38,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::group(['prefix' => 'user', 'as' => 'user'], function() {
+    Route::any('{any?}', function () {
+        return view('frontend.user-layout');
+    })->where('any', '.*');
+});
 
 // Auth
 Auth::routes();
