@@ -7,7 +7,7 @@
         <title>Social Marketplace</title>
         <link rel="stylesheet" href="{{ asset('frontend/app.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/font-awesome/css/all.css') }}">
-        
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="h-full bg-[#F3F3F3]" x-data="dropdown">
         @include('frontend.top-nav')
@@ -24,72 +24,39 @@
                         </svg>
                     </button>
                     <div x-show="categoryDropOpen" @click.outside="categoryDropOpen=false" class="mt-2 divide-y divide-slate-200 absolute w-full z-10 bg-white shadow-2xl shadow-black/5 ring-1 ring-slate-700/10"  style="display: none;">
-                        <div class="relative group">
-                            <div class="flex px-3 py-2 justify-between items-center group-hover:bg-indigo-600 group-hover:text-white cursor-pointer transition-all duration-200">
-                                <div class="flex items-center gap-2">
-                                    <i class="fa-brands fa-facebook"></i>
-                                    Wade Cooper
-                                </div>
-                                <svg class="w-5 h-5 -rotate-90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="absolute hidden group-hover:block left-full top-0 bg-white w-full border-l">
+                        @foreach ($global_categories as $category)
+                            @if (count($category->childs) == 0)    
                                 <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
+                                    <div class="flex items-center gap-2">
+                                        {{-- <i class="fa-brands fa-instagram"></i> --}}
+                                        <img class="w-7 h-6" src="{{ asset($category->image) }}" alt="">
+                                        {{ $category->name }}
+                                    </div>
                                 </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
+                            @endif
+                            @if (count($category->childs) > 0)
+                                <div class="relative group">
+                                    <div class="flex px-3 py-2 justify-between items-center group-hover:bg-indigo-600 group-hover:text-white cursor-pointer transition-all duration-200">
+                                        <div class="flex items-center gap-2">
+                                            <img src="{{ asset($category->image) }}" alt="">
+                                            {{ $category->name }}
+                                        </div>
+                                        <svg class="w-5 h-5 -rotate-90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute hidden group-hover:block left-full top-0 bg-white w-full border-l">
+                                        @foreach ($category->childs as $child)    
+                                            <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
+                                                {{ $child->name }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative group">
-                            <div class="flex px-3 py-2 justify-between items-center group-hover:bg-indigo-600 group-hover:text-white cursor-pointer transition-all duration-200">
-                                <div class="flex items-center gap-2">
-                                    <i class="fa-brands fa-twitter"></i>
-                                    Wade Cooper
-                                </div>
-                                <svg class="w-5 h-5 -rotate-90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="absolute hidden group-hover:block left-full top-0 bg-white w-full border-l">
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                                <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                                    Arlene Mccoy
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-brands fa-instagram"></i>
-                                Tom Cook
-                            </div>
-                        </div>
-                        <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-brands fa-telegram"></i>
-                                Devon Webb
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="flex-1 flex justify-end">
@@ -99,7 +66,9 @@
             </div>
         </div>
 
-        @yield('content')
+        <div class="max-w-screen-xl mx-auto px-4 xl:px-0">
+            @yield('content')
+        </div>
 
         <footer class="bg-white dark:bg-gray-900 mt-2">
             <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">

@@ -89,14 +89,14 @@
                     <i class="fa-regular fa-circle-info"></i> New ticket / Ask a question
                 </div>
                 <div class="flex items-center">
-                    <router-link to="/" exact-active-class="!border-indigo-500"
+                    <a href="/" exact-active-class="!border-indigo-500"
                         class="flex items-center gap-1 border-b-2 border-transparent hover:border-indigo-500 px-4 py-3">
                         Home
-                    </router-link>
-                    <router-link to="/faq" exact-active-class="!border-indigo-500"
+                    </a>
+                    <a href="/faq" exact-active-class="!border-indigo-500"
                         class="flex items-center gap-1 border-b-2 border-transparent hover:border-indigo-500 px-4 py-3">
                         FAQ
-                    </router-link>
+                    </a>
                     <div class="relative group/navHover cursor-pointer">
                         <div
                             class="flex items-center gap-1 border-b-2 border-transparent hover:border-indigo-500 px-4 py-3">
