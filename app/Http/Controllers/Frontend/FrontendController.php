@@ -17,4 +17,13 @@ class FrontendController extends Controller
     public function faq() {
         return view('frontend.pages.faq');
     }
+    public function recommendations() {
+        return view('frontend.pages.recommendations');
+    }
+    public function selection() {
+        return view('frontend.pages.selection');
+    }
+    public function rules() {
+        return view('frontend.pages.rules');
+    }
 }

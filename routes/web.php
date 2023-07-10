@@ -39,6 +39,9 @@ use App\Http\Livewire\Admin\Site\OptimizeApplication;
 // Public
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/recommendations', [FrontendController::class, 'recommendations'])->name('recommendations');
+Route::get('/selection', [FrontendController::class, 'selection'])->name('selection');
+Route::get('/rules', [FrontendController::class, 'rules'])->name('rules');
 
 Route::group(['prefix' => 'user', 'as' => 'user'], function() {
     Route::any('{any?}', function () {
