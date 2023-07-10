@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,17 @@ use App\Http\Controllers\Api\ProfileController;
 |
 */
 
+
+// Public
 Route::post('/register', [AuthController::class, 'createUser']);
 Route::post('/login', [AuthController::class, 'loginUser']);
 
-// Buyer
+Route::get('/categories', [LandingPageController::class, 'categories']);
+Route::get('/products', [LandingPageController::class, 'productsFiltered']);
+Route::post('/product/subscribe', [LandingPageController::class, 'subscribeProduct'])->middleware(['auth:sanctum', 'json']);
+
+
+// Common
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
@@ -27,6 +35,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], fun
     Route::get('/language', [ProfileController::class, 'currentLanguage']);
     Route::put('/language', [ProfileController::class, 'updateLanguage']);
 });
+
+
 
 
 

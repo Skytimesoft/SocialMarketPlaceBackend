@@ -78,8 +78,8 @@ class ProductEdit extends Component
 
     public function updateProduct()
     {
-        $d = $this->validate();
-        $this->product->save();
+        $this->validate();
+        $this->product->updateModel($this->product);
 
         $this->alert = false;
         $this->alertType = 'success';
