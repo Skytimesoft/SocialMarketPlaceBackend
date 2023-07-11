@@ -21,15 +21,15 @@
                         </svg>
                         <span class="text-white">@accsmarket</span>
                     </a>
-                    <a x-show="token!==null" href="/user" class="flex items-center gap-1" style="display: none">
+                    <a x-show="token!==null || token!== ''" href="/user" class="flex items-center gap-1" style="display: none">
                         <i class="fa-duotone fa-user"></i>
                         Your Account
                     </a>
-                    <div x-show="token==null" class="flex items-center gap-2" style="display: none">
+                    <div x-show="token==null || token==''" class="flex items-center gap-2" style="display: none">
                         <button x-on:click="toggleSignUp" class="flex border items-center px-3 rounded gap-1 hover:border-indigo-500 hover:text-indigo-300">
                             + Sign Up
                         </button>
-                        <button class="flex border items-center px-3 rounded bg-indigo-500 border-indigo-500 text-white gap-1">
+                        <button x-on:click="signInDialougOpen=true" class="flex border items-center px-3 rounded bg-indigo-500 border-indigo-500 text-white gap-1">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
                                 <path d="M4.9995 4.63768C6.28016 4.63768 7.31835 3.5995 7.31835 2.31884C7.31835 1.03818 6.28016 0 4.9995 0C3.71884 0 2.68066 1.03818 2.68066 2.31884C2.68066 3.5995 3.71884 4.63768 4.9995 4.63768Z" fill="white"></path>
                                 <path d="M4.99977 5.79712C2.67858 5.79712 0.796875 7.67882 0.796875 10H9.20267C9.20267 7.67882 7.32097 5.79712 4.99977 5.79712Z" fill="white"></path>

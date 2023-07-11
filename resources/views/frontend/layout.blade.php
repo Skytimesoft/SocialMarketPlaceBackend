@@ -105,6 +105,7 @@
                 Alpine.data('dropdown', () => ({
                     categoryDropOpen: false,
                     signUpDialougOpen: false,
+                    signInDialougOpen: false,
                     token: token,
                     signup: {
                         name: '',
@@ -113,10 +114,31 @@
                         password_confirmation: '',
                         user_type: 'Buyer',
                     },
+                    login: {
+                        email: '',
+                        password: '',
+                    },
                     toggleSignUp() {
                         this.signUpDialougOpen = ! this.signUpDialougOpen 
                     },
                     handleLogin() {
+                        fetch(`{{ url('/api/login') }}`, {
+                            method: "POST", // *GET, POST, PUT, DELETE, etc.
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(this.login), // body data type must match "Content-Type" header
+                        }).then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            if (result?.data?.access_token) {
+                                localStorage.setItem('d-user-token', result?.data?.access_token)
+                                localStorage.setItem('d-user-info', JSON.stringify(result?.data?.user))
+                                location.href = `{{ url('/user') }}`
+                            }
+                        })
+                    },
+                    handleRegister() {
                         // console.log(JSON.stringify(this.signup));
                         const response = fetch(`{{ url('/api/register') }}`, {
                             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -128,11 +150,10 @@
                         .then(result => {
                             if (result?.data?.access_token) {
                                 localStorage.setItem('d-user-token', result?.data?.access_token)
-                                localStorage.setItem('d-user-info', result?.data?.user)
+                                localStorage.setItem('d-user-info', JSON.stringify(result?.data?.user))
                                 location.href = `{{ url('/user') }}`
                             }
-                        })
-
+                        }) 
                     },
                 }))
             })
