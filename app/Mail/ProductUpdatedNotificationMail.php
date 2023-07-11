@@ -49,7 +49,7 @@ class ProductUpdatedNotificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'product_updated',
+            view: 'vendor.mail.product_updated_two',
         );
     }
 
