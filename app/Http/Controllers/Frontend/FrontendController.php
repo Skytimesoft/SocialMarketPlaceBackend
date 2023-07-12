@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     public function index() {
+        // $users = User::all();
+        // foreach($users as $key => $value) {
+        //     $code1 = $value->id.rand(1000000,9999999);
+        //     $code2 = base64_encode($value->id.rand(1000000,9999999));
+        //     $value->update([
+        //         'referral_one' => $code1,
+        //         'referral_two' => $code2,
+        //     ]);
+        // }
         $category_with_product = Category::with(['childs', 'products'])->get();
         return view('home', compact('category_with_product'));
     }

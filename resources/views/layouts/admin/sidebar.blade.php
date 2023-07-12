@@ -319,9 +319,9 @@
                         <a class="dropdown-item" href="{{ route('admin.site.logo') }}" rel="noopener">
                             Site Logo
                         </a>
-                        <a class="dropdown-item" href="{{ route('faqs.index') }}" rel="noopener">
+                        {{-- <a class="dropdown-item" href="{{ route('faqs.index') }}" rel="noopener">
                             Faq
-                        </a>
+                        </a> --}}
                         <a class="dropdown-item" href="{{ route('admin.site.link-storage') }}" rel="noopener">
                             Link Storage
                         </a>

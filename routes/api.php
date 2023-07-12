@@ -32,16 +32,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], fun
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::get('/sign-out', [AuthController::class, 'signOut']);
 
+    Route::get('/');
+
     Route::get('/language', [ProfileController::class, 'currentLanguage']);
     Route::put('/language', [ProfileController::class, 'updateLanguage']);
 });
-
-
-
-
-
-
-
-
-
-
