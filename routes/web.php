@@ -20,6 +20,7 @@ use App\Http\Livewire\Admin\Product\ProductList;
 use App\Http\Livewire\Admin\Product\CategoryList;
 use App\Http\Livewire\Admin\Product\ProductCreate;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Livewire\Admin\Product\SubCategoryList;
 use App\Http\Livewire\Admin\Profile as AdminProfile;
@@ -67,6 +68,15 @@ Route::post('/product/order', [OrderController::class, 'placeOrder'])->middlewar
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+    
+    Route::group(['as' => 'faqs.', 'prefix' => 'faqs'], function() {
+        Route::get('/', [FaqController::class, 'index'])->name('index');
+        Route::get('/create', [FaqController::class, 'create'])->name('create');
+        Route::post('/store', [FaqController::class, 'store'])->name('store');
+        Route::get('/edit', [FaqController::class, 'edit'])->name('store');
+        Route::get('/update', [FaqController::class, 'update'])->name('update');
+        Route::post('/delete', [FaqController::class, 'delete'])->name('delete');
+    });
 
     // Buyers routes
     Route::get('/users', UserList::class)->name('admin.user.list');
