@@ -14,17 +14,20 @@ return new class extends Migration {
             $table->id();
             $table->string('title', 191)->index();
             $table->text('description');
-            $table->string('stock');
+            $table->string('stock')->default(0);
             $table->decimal('price', 10, 4);
             $table->string('price_currency', 191)->default('USD');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('sub_category_id')->nullable();
+            $table->unsignedBigInteger('owner_id');
+            $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::table('products', function ($table) {
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
-            $table->foreign('sub_category_id')->references('id')->on('subcategories')->onDelete('set null');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('set null');
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -5,9 +5,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
-            <a href=".">
-                <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
-            </a>
+            <div class="" style="height: 50px;">
+                <img src="{{ Vite::asset('public/storage/logo.png') }}" style="max-width: 100%; max-height: 100%;" alt="Logo">
+            </div>
         </h1>
         <div class="navbar-nav flex-row d-lg-none">
             <div class="nav-item d-none d-lg-flex me-3">
@@ -315,13 +315,13 @@
                         </span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" target="_blank" rel="noopener">
+                        <a class="dropdown-item" href="{{ route('admin.site.logo') }}" rel="noopener">
                             Site Logo
                         </a>
-                        <a class="dropdown-item" href="#" target="_blank" rel="noopener">
+                        <a class="dropdown-item" href="{{ route('admin.site.link-storage') }}" rel="noopener">
                             Link Storage
                         </a>
-                        <a class="dropdown-item" href="#" target="_blank" rel="noopener">
+                        <a class="dropdown-item" href="{{ route('admin.site.optimize-application') }}" rel="noopener">
                             Optimize Application
                         </a>
                     </div>

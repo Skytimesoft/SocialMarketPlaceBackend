@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+@php
+    $tinyAPI = 'x6n0kjoezjwiuijiwf6apus1qjlj7mkalr87v5lbxy6ma0fi';
+@endphp
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,7 +53,11 @@
     </script>
     @vite('public/dist/js/livewire-turbolinks.js')
 
+    {{-- Libraries --}}
+    <script src="https://cdn.tiny.cloud/1/{{ $tinyAPI }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <!-- Page level custom scripts -->
     @yield('custom_scripts')
+    @stack('scripts')
 </body>
 </html>
