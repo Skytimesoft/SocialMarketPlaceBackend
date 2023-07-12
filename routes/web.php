@@ -1,8 +1,18 @@
 <?php
 
+use App\Http\Livewire\Admin\Product\ProductCreate;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Admin\UserList;
+use App\Http\Livewire\Admin\UserView;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Dashboard;
+use App\Http\Livewire\Admin\SellerList;
+use App\Http\Livewire\Admin\Product\ProductList;
+use App\Http\Livewire\Admin\Product\CategoryList;
+use App\Http\Livewire\Admin\Product\SubCategoryList;
+use App\Http\Livewire\Admin\Profile as AdminProfile;
+
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -31,15 +41,23 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/users', [UserController::class, 'index'])->name('admin.user.list');
-    Route::get('/sellers', [SellerController::class, 'index'])->name('admin.seller.list');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
+    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+
+    // Buyers routes
+    Route::get('/users', UserList::class)->name('admin.user.list');
+    Route::get('/user/view/{id}', UserView::class)->name('admin.user.view');
+
+    // Sellers routes
+    Route::get('/sellers', SellerList::class)->name('admin.seller.list');
+
+    // Products routes
+    Route::get('/categories', CategoryList::class)->name('admin.category.list');
+    Route::get('/subcategories', SubCategoryList::class)->name('admin.subcategory.list');
+    Route::get('/products', ProductList::class)->name('admin.product.list');
+    Route::get('/product/new', ProductCreate::class)->name('admin.product.create');
+
+    Route::get('/profile', AdminProfile::class)->name('admin.profile');
 });
 
 
-// Common
-Route::middleware('auth')->group(function () {
-    Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-});
