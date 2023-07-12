@@ -44,6 +44,8 @@ Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/recommendations', [FrontendController::class, 'recommendations'])->name('recommendations');
 Route::get('/selection', [FrontendController::class, 'selection'])->name('selection');
 Route::get('/rules', [FrontendController::class, 'rules'])->name('rules');
+Route::get('/item/{id}/{slug?}', [FrontendController::class, 'productDetails'])->name('productDetails');
+Route::get('/cat/{id}/{slug?}', [FrontendController::class, 'productDetails'])->name('productDetails');
 
 Route::group(['prefix' => 'user', 'as' => 'user'], function() {
     Route::any('{any?}', function () {

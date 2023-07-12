@@ -26,4 +26,8 @@ class FrontendController extends Controller
     public function rules() {
         return view('frontend.pages.rules');
     }
+    public function productDetails($id, $slug) {
+        $product = Product::with('category')->findOrFail($id);
+        return view('frontend.pages.productDetails', compact('product'));
+    }
 }
