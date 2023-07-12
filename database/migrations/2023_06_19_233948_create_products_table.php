@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->unsignedBigInteger('owner_id');
+            $table->softDeletes();
             $table->timestamps();
         });
 

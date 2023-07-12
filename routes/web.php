@@ -10,6 +10,7 @@ use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Site\Logo;
 use App\Http\Livewire\Admin\SellerList;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Livewire\Admin\Site\LinkStorage;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Livewire\Admin\Seller\SellerView;
@@ -49,6 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/email/verify/{id}/{hash}', [HomeController::class, 'handleVerification'])->name('verification.verify')->middleware(['signed']);
     Route::post('/email/verify/resend', [HomeController::class, 'verifyResend'])->name('verification.resend')->middleware(['throttle:6,1']);
 });
+
+
+// User only
+Route::post('/product/order', [OrderController::class, 'placeOrder'])->middleware(['auth']);
 
 
 // Admin

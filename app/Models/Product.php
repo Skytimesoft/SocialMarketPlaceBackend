@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Events\ProductUpdated;
 use App\Models\ProductSubscription;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['title', 'description', 'price', 'category_id', 'sub_category_id', 'owner_id'];
 
