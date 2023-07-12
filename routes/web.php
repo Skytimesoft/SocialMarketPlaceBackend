@@ -20,6 +20,7 @@ use App\Http\Livewire\Admin\Product\ProductList;
 use App\Http\Livewire\Admin\Product\CategoryList;
 use App\Http\Livewire\Admin\Product\ProductCreate;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Livewire\Admin\Product\SubCategoryList;
 use App\Http\Livewire\Admin\Profile as AdminProfile;
 use App\Http\Livewire\Admin\Site\OptimizeApplication;
@@ -37,10 +38,17 @@ use App\Http\Livewire\Admin\Site\OptimizeApplication;
 
 
 // Public
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/recommendations', [FrontendController::class, 'recommendations'])->name('recommendations');
+Route::get('/selection', [FrontendController::class, 'selection'])->name('selection');
+Route::get('/rules', [FrontendController::class, 'rules'])->name('rules');
 
+Route::group(['prefix' => 'user', 'as' => 'user'], function() {
+    Route::any('{any?}', function () {
+        return view('frontend.user-layout');
+    })->where('any', '.*');
+});
 
 // Auth
 Auth::routes();
