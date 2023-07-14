@@ -40,7 +40,10 @@
                 aria-hidden="true"></div>
         </div>
         @foreach ($category->products as $product)  
-        <a href="#" 
+        <a href="{{ route('productDetails', [
+            'id' => $product->id,
+            'slug' => str()->slug($product->title)
+        ]) }}" 
             class="relative flex-col cursor-pointer sm:flex-row flex items-center bg-white mb-2 border-2 border-transparent shadow hover:border-indigo-500 rounded-md">
             <div
                 class="flex-1 flex flex-col lg:flex-row justify-between w-full lg:items-center gap-4 px-3 py-4 font-medium text-gray-900 dark:text-white">
