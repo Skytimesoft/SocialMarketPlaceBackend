@@ -61,7 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // User only
-Route::post('/product/order', [OrderController::class, 'placeOrder'])->middleware(['auth']);
+Route::post('/product/order', [OrderController::class, 'placeOrder'])->name('place.order')->middleware(['auth']);
+Route::get('/product/order/modal/view/{id}', [OrderController::class, 'modalView'])->name('buy.modal');
 
 
 // Admin

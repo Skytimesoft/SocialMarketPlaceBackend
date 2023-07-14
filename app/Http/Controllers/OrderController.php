@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'product_id' => "required|numeric",
-            'coupon_id' => "nullable",
+            'coupon' => "nullable",
             'quantity' => "required|numeric",
         ]);
 
@@ -38,5 +38,16 @@ class OrderController extends Controller
         ]);
 
         return view('order_placed', compact('order'));
+    }
+
+    public function modalView($id)
+    {
+        $product = Product::find($id);
+
+        if (is_null($product)) {
+            return "Not Found!";
+        }
+
+        return view('buy_modal_view', compact('product'))->render();
     }
 }
