@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21bd1e16be442a9f8df218d846744ead",
+    "content-hash": "c7f163354a3d613630aa8f1839720741",
     "packages": [
         {
             "name": "brick/math",
@@ -2006,6 +2006,79 @@
                 }
             ],
             "time": "2023-03-03T20:12:38+00:00"
+        },
+        {
+            "name": "michael-rubel/laravel-couponables",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michael-rubel/laravel-couponables.git",
+                "reference": "0f465578a0d3b877620707ba67ce511a0a78ae38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michael-rubel/laravel-couponables/zipball/0f465578a0d3b877620707ba67ce511a0a78ae38",
+                "reference": "0f465578a0d3b877620707ba67ce511a0a78ae38",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.13"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.3",
+                "infection/infection": "^0.26.7",
+                "laravel/pint": "^1.2",
+                "mockery/mockery": "^1.4.4",
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.5",
+                "roave/backward-compatibility-check": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MichaelRubel\\Couponables\\CouponableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MichaelRubel\\Couponables\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Rubel",
+                    "email": "contact@observer.name",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "This package provides polymorphic coupon functionality for your Laravel application.",
+            "homepage": "https://github.com/michael-rubel/laravel-couponables",
+            "keywords": [
+                "laravel",
+                "laravel-couponables",
+                "michael-rubel"
+            ],
+            "support": {
+                "issues": "https://github.com/michael-rubel/laravel-couponables/issues",
+                "source": "https://github.com/michael-rubel/laravel-couponables/tree/8.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.com/donate/?hosted_button_id=KHLEL8PFS4AXJ",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-06-14T12:08:58+00:00"
         },
         {
             "name": "monolog/monolog",

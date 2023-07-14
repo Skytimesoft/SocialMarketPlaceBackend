@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use MichaelRubel\Couponables\Traits\HasCoupons;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCoupons;
 
     protected $fillable = ['unique_id', 'user_id', 'product_id', 'downloadable', 'status', 'quantity', 'total_amount'];
 
