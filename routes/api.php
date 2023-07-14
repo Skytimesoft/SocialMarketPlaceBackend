@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Buyer\OrderController;
 use App\Http\Controllers\Api\LandingPageController;
 
 /*
@@ -37,3 +38,16 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], fun
     Route::get('/language', [ProfileController::class, 'currentLanguage']);
     Route::put('/language', [ProfileController::class, 'updateLanguage']);
 });
+
+// Buyer
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], function () {
+    Route::get('/orders', [OrderController::class, 'show']);
+});
+
+
+
+
+
+
+
+

@@ -25,7 +25,7 @@
                     </button>
                     <div x-show="categoryDropOpen" @click.outside="categoryDropOpen=false" class="mt-2 divide-y divide-slate-200 absolute w-full z-10 bg-white shadow-2xl shadow-black/5 ring-1 ring-slate-700/10"  style="display: none;">
                         @foreach ($global_categories as $category)
-                            @if (count($category->childs) == 0)    
+                            @if (count($category->childs) == 0)
                                 <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
                                     <div class="flex items-center gap-2">
                                         {{-- <i class="fa-brands fa-instagram"></i> --}}
@@ -48,7 +48,7 @@
                                         </svg>
                                     </div>
                                     <div class="absolute hidden group-hover:block left-full top-0 bg-white w-full border-l">
-                                        @foreach ($category->childs as $child)    
+                                        @foreach ($category->childs as $child)
                                             <div class="px-3 py-2 hover:bg-indigo-600 hover:text-white cursor-pointer transition-all duration-200">
                                                 {{ $child->name }}
                                             </div>
@@ -73,7 +73,7 @@
         <footer class="bg-white dark:bg-gray-900 mt-2">
             <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div class="sm:flex sm:items-center sm:justify-between">
-                    <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0"> 
+                    <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Logo</span>
                     </a>
                     <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
@@ -96,7 +96,7 @@
                         href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
             </div>
         </footer>
-        
+
         <script src="//unpkg.com/alpinejs" defer></script>
         <script>
             document.addEventListener('alpine:init', () => {
@@ -119,7 +119,7 @@
                         password: '',
                     },
                     toggleSignUp() {
-                        this.signUpDialougOpen = ! this.signUpDialougOpen 
+                        this.signUpDialougOpen = ! this.signUpDialougOpen
                     },
                     handleLogin() {
                         fetch(`{{ url('/api/login') }}`, {
@@ -153,10 +153,14 @@
                                 localStorage.setItem('d-user-info', JSON.stringify(result?.data?.user))
                                 location.href = `{{ url('/user') }}`
                             }
-                        }) 
+                        })
                     },
                 }))
             })
         </script>
+
+        <!-- Page level custom scripts -->
+        @yield('custom_scripts')
+        @stack('scripts')
     </body>
 </html>

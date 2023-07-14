@@ -16,8 +16,8 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'product_id' => "required|numeric",
-            'coupon_id' => "nullable",
-            'quantity' => "required|numeric",
+            'coupon' => "nullable",
+            'quantity' => "required|integer",
         ]);
 
         $user = auth()->user();
@@ -31,12 +31,28 @@ class OrderController extends Controller
             'unique_id' => Order::getUniqueOrderId(),
             'user_id' => $user->id,
             'product_id' => $product->id,
-            // 'coupon_id' => $request->coupon_id,
             'status' => OrderStatus::Pending,
             'quantity' => $request->quantity,
-            'total_amount' => OrderService::calculateTotalAmount($product, $request->quantity, null),
+            'total_amount' => OrderService::calculateTotalAmount($product, $request->quantity),
         ]);
 
+        $order = OrderService::applyCoupon($order, $request->coupon);
+        $order->save();
+
+        $product->stock = $product->stock - $request->quantity;
+        $product->save();
+
         return view('order_placed', compact('order'));
+    }
+
+    public function modalView($id)
+    {
+        $product = Product::find($id);
+
+        if (is_null($product)) {
+            return "Not Found!";
+        }
+
+        return view('buy_modal_view', compact('product'))->render();
     }
 }
