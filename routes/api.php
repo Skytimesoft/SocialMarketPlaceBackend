@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\LandingPageController;
+use App\Http\Controllers\Backend\FoundController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +29,18 @@ Route::post('/product/subscribe', [LandingPageController::class, 'subscribeProdu
 
 // Common
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], function () {
+    Route::get('/verification-token', function() {
+        return response(true);
+    });
+    Route::get('/get-user', function() {
+        return auth()->user();
+    });
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::get('/sign-out', [AuthController::class, 'signOut']);
 
-    Route::get('/');
+    Route::post('/add-fund-token', [FoundController::class, 'addFundToken']);
+    Route::post('/get-fund-history', [FoundController::class, 'getFundHistory']);
 
     Route::get('/language', [ProfileController::class, 'currentLanguage']);
     Route::put('/language', [ProfileController::class, 'updateLanguage']);
