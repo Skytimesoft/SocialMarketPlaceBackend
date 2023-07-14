@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\ProductUpdated;
 use App\Models\ProductSubscription;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,9 +21,14 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function subscriptions()
+    public function subscriptions(): HasMany
     {
         return $this->hasMany(ProductSubscription::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function updateModel(Product $product)

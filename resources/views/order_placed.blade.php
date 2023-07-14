@@ -1,1 +1,5 @@
-{{ $order }}
+@extends('frontend.layout')
+
+@section('content')
+
+@endsection
