@@ -101,7 +101,7 @@
 @endforeach
 
     <!-- Buy Modal -->
-    <div x-data="fetchProductOrderView()">
+    <div x-data="fetchProductOrderView()" x-cloak>
         <template x-on:modal.window="productPrice = $event.detail.productPrice; url = $event.detail.url; modelOpen = $event.detail.modelOpen; fetchView();"></template>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
