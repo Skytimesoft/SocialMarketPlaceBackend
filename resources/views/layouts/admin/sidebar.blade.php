@@ -163,6 +163,7 @@
                 </div>
             </div>
         </div>
+
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
                 <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : '' }}">
@@ -318,6 +319,9 @@
                         <a class="dropdown-item" href="{{ route('admin.site.logo') }}" rel="noopener">
                             Site Logo
                         </a>
+                        {{-- <a class="dropdown-item" href="{{ route('faqs.index') }}" rel="noopener">
+                            Faq
+                        </a> --}}
                         <a class="dropdown-item" href="{{ route('admin.site.link-storage') }}" rel="noopener">
                             Link Storage
                         </a>
