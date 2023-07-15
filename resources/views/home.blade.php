@@ -39,13 +39,13 @@
                 aria-hidden="true"></div>
         </div>
         @foreach ($category->products as $product)
-        <a href="{{ route('productDetails', [
-            'id' => $product->id,
-            'slug' => str()->slug($product->title)
-        ]) }}"
-            class="relative flex-col cursor-pointer sm:flex-row flex items-center bg-white mb-2 border-2 border-transparent shadow hover:border-indigo-500 rounded-md">
-            <div
-                class="flex-1 flex flex-col lg:flex-row justify-between w-full lg:items-center gap-4 px-3 py-4 font-medium text-gray-900 dark:text-white">
+        <div 
+            class="relative flex-col sm:flex-row flex items-center bg-white mb-2 border-2 border-transparent shadow hover:border-indigo-500 rounded-md">
+            <a href="{{ route('productDetails', [
+                'id' => $product->id,
+                'slug' => str()->slug($product->title)
+            ]) }}"
+                class="flex-1 hover:underline flex flex-col lg:flex-row justify-between w-full lg:items-center gap-4 px-3 py-4 font-medium text-gray-900 dark:text-white">
                 <div class="flex justify-between w-full md:w-auto">
                     <div class="bg-indigo-500 text-white rounded-md shadow-md px-2 py-1">
                         <i class="text-2xl fa-brands fa-facebook"></i>
@@ -66,7 +66,7 @@
                 <div class="flex-1">
                     {{ $product->title }}
                 </div>
-            </div>
+            </a>
             <div class="px-6 py-4 w-[140px] hidden lg:block text-center">
                 0
             </div>
@@ -83,7 +83,7 @@
                 </span>
             </div>
             <div class="px-3 py-4 w-[140px] hidden lg:block text-right">
-                <button @click="$dispatch('modal', {modelOpen: true, productPrice: '{{ $product->price }}',  url: '{{ route('buy.modal', ['id' => $product->id]) }}'})" type="button" class="text-indigo-700 border border-indigo-700 hover:bg-indigo-700 hover:text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center">
+                <button on:click.prevent="$dispatch('modal', {modelOpen: true, productPrice: '{{ $product->price }}',  url: '{{ route('buy.modal', ['id' => $product->id]) }}'})" type="button" class="text-indigo-700 border border-indigo-700 hover:bg-indigo-700 hover:text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </button>
             </div>
@@ -97,7 +97,7 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                 </button>
             </div> --}}
-        </a>
+        </div>
         @endforeach
     </div>
     @endif
