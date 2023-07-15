@@ -34,12 +34,19 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
+            
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
             ]);
+            $code1 = $user->id.rand(1000000,9999999);
+            $code2 = base64_encode($user->id.rand(1000000,9999999));
+            $user->update([
+                'referral_one' => $code1,
+                'referral_two' => $code2,
+            ]);
+            // 'referral_one' => $request->referral_one,
 
             $user->assignRole($request->user_type);
 
