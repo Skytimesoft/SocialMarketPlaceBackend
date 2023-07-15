@@ -200,5 +200,5 @@
 
 
 @section('custom_scripts')
-<script src="{{ asset('frontend/assets/js/buy-modal.js') }}"></script>
+<script src="{{ asset('frontend/js/buy-modal.js') }}"></script>
 @endsection
