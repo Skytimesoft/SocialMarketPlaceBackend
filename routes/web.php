@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Models\Product;
+use App\Http\Livewire\Admin\Order\OrderView;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\UserList;
 use App\Http\Livewire\Admin\UserView;
@@ -11,19 +10,20 @@ use App\Http\Livewire\Admin\Site\Logo;
 use App\Http\Livewire\Admin\SellerList;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Livewire\Admin\Order\OrderList;
 use App\Http\Livewire\Admin\Site\LinkStorage;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Livewire\Admin\Seller\SellerView;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Livewire\Admin\Product\ProductEdit;
 use App\Http\Livewire\Admin\Product\ProductList;
 use App\Http\Livewire\Admin\Product\CategoryList;
 use App\Http\Livewire\Admin\Product\ProductCreate;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Backend\FaqController;
-use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Livewire\Admin\Product\SubCategoryList;
 use App\Http\Livewire\Admin\Profile as AdminProfile;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Livewire\Admin\Site\OptimizeApplication;
 
 /*
@@ -71,7 +71,7 @@ Route::get('/product/order/modal/view/{id}', [OrderController::class, 'modalView
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
-    
+
     Route::group(['as' => 'faqs.', 'prefix' => 'faqs'], function() {
         Route::get('/', [FaqController::class, 'index'])->name('index');
         Route::get('/create', [FaqController::class, 'create'])->name('create');
@@ -95,6 +95,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/products', ProductList::class)->name('admin.product.list');
     Route::get('/product/new', ProductCreate::class)->name('admin.product.create');
     Route::get('/product/edit/{id}', ProductEdit::class)->name('admin.product.edit');
+
+    // Orders
+    Route::get('/orders', OrderList::class)->name('admin.order.list');
+    Route::get('/order/view/{id}', OrderView::class)->name('admin.order.view');
+
 
     // Site Settings
     Route::get('/site-logo', Logo::class)->name('admin.site.logo');
