@@ -1,0 +1,66 @@
+<div>
+
+    <div class="container-xl mt-2">
+        @if($alert)
+        @livewire('components.alert', ['type' => $alertType, 'message' => $alertMessage])
+        @endif
+    </div>
+
+    <div class="page-body px-3">
+        <form wire:submit.prevent="updateCoupon" autocomplete="off">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">New Coupon</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label required">Code</label>
+                        <div class="col">
+                            <input wire:model.defer="coupon.code" type="text" class="form-control" placeholder="Enter Coupon Code" required>
+                            @error('coupon.code')
+                            <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label required">Value</label>
+                        <div class="col">
+                            <input wire:model.defer="coupon.value" type="number" class="form-control" min="1" step="1" placeholder="Enter Discount Amount" />
+                            @error('coupon.value')
+                            <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label required">Status</label>
+                        <div class="col">
+                            <select wire:model="status" class="form-control form-select" >
+                                <option value="">Choose Status</option>
+                                <option value="1" {{ ((int)$status > 0) ? 'selected' : '' }}>Enabled</option>
+                                <option value="0" {{ ((int)$status == 0) ? 'selected' : '' }}>Disabled</option>
+                            </select>
+                            @error('status')
+                            <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label">Limit (times)</label>
+                        <div class="col">
+                            <input wire:model.defer="coupon.limit" type="number" class="form-control" min="1" step="1" placeholder="Enter Usage Limit" />
+                            @error('coupon.limit')
+                            <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary w-20">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

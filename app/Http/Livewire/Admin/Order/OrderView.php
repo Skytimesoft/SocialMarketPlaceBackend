@@ -8,7 +8,6 @@ use Livewire\Component;
 use App\Enums\OrderStatus;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Enum;
 use MichaelRubel\Couponables\Models\Coupon;
 
