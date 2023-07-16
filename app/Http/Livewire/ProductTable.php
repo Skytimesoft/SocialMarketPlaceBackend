@@ -53,7 +53,7 @@ class ProductTable extends DataTableComponent
 
         return [
             Column::make("ID", 'id')
-                ->hideIf(true),
+                ->searchable(),
             Column::make("Title", "title")
                 ->searchable()
                 ->format(

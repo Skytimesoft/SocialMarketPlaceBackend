@@ -52,4 +52,12 @@ class OrderService
 
         return $order;
     }
+
+    public static function subtractDiscountFromAmount($amount, $discount)
+    {
+        $amount = Money::of(strval($amount), 'USD', new CustomContext(4));
+        $totalMoneyObject = $amount->minus($discount, RoundingMode::UP);
+
+        return $totalMoneyObject->getAmount();
+    }
 }

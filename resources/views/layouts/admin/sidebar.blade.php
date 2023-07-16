@@ -252,7 +252,7 @@
                         </div>
                     </div>
                 </li> --}}
-                <li class="nav-item dropdown {{ Route::is('admin.category.list') | Route::is('admin.subcategory.list') | Route::is('admin.product.list') ? 'active' : '' }}">
+                <li class="nav-item dropdown {{ Route::is('admin.category.list') | Route::is('admin.subcategory.list') | Route::is('admin.product.list') | Route::is('admin.order.list') ? 'active' : '' }}">
                     <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-producthunt" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9BA4B5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -282,6 +282,12 @@
                             <div class="dropdown-menu-column">
                                 <a class="dropdown-item" href="{{ route('admin.product.list') }}">
                                     Products
+                                </a>
+                        </div>
+                        <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('admin.order.list') }}">
+                                    Orders
                                 </a>
                         </div>
                     </div>
