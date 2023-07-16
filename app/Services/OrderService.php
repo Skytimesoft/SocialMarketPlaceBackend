@@ -6,7 +6,6 @@ use App\Models\Order;
 use Brick\Money\Money;
 use App\Models\Product;
 use Brick\Math\RoundingMode;
-use Illuminate\Support\Facades\Log;
 use Brick\Money\Context\CustomContext;
 
 class OrderService

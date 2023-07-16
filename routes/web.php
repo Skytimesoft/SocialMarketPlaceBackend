@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Livewire\Admin\Order\OrderView;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\UserList;
 use App\Http\Livewire\Admin\UserView;
@@ -11,11 +10,15 @@ use App\Http\Livewire\Admin\SellerList;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Livewire\Admin\Order\OrderList;
+use App\Http\Livewire\Admin\Order\OrderView;
 use App\Http\Livewire\Admin\Site\LinkStorage;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Livewire\Admin\Coupon\CouponEdit;
+use App\Http\Livewire\Admin\Coupon\CouponList;
 use App\Http\Livewire\Admin\Seller\SellerView;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Admin\SellerController;
+use App\Http\Livewire\Admin\Coupon\CouponCreate;
 use App\Http\Livewire\Admin\Product\ProductEdit;
 use App\Http\Livewire\Admin\Product\ProductList;
 use App\Http\Livewire\Admin\Product\CategoryList;
@@ -100,6 +103,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/orders', OrderList::class)->name('admin.order.list');
     Route::get('/order/view/{id}', OrderView::class)->name('admin.order.view');
 
+    // Coupons
+    Route::get('/coupons', CouponList::class)->name('admin.coupon.list');
+    Route::get('/coupon/new', CouponCreate::class)->name('admin.coupon.create');
+    Route::get('/coupon/edit/{id}', CouponEdit::class)->name('admin.coupon.edit');
 
     // Site Settings
     Route::get('/site-logo', Logo::class)->name('admin.site.logo');
