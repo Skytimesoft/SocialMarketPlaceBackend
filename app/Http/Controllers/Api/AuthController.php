@@ -7,7 +7,9 @@ use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\ReferralEarn;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,7 +36,27 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-            
+
+            $referral_user = null;
+
+            if ($request->referral) {
+                $referral_user = User::where('referral_one', $request->referral)
+                                    ->orWhere('referral_two', $request->referral)
+                                    ->first();
+                if (!$referral_user) {
+                    return response()->json([
+                        'message' => 'Invalid referral code',
+                        'data' => $referral_user
+                    ]);
+                }
+            }
+
+            // return response()->json([
+            //     'message' => 'pass',
+            //     'data' => $request->referral
+            // ]);
+
+            DB::beginTransaction();
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -45,11 +67,20 @@ class AuthController extends Controller
             $user->update([
                 'referral_one' => $code1,
                 'referral_two' => $code2,
+                'by_referral' => $referral_user->id,
             ]);
+
+            if ($referral_user) {
+                ReferralEarn::create([
+                    'amount' => 20,
+                    'user_id' => $referral_user->id,
+                ]);
+            }
+
             // 'referral_one' => $request->referral_one,
 
             $user->assignRole($request->user_type);
-
+            DB::commit();
             return response()->json([
                 'message' => 'User Created Successfully',
                 'data' => [

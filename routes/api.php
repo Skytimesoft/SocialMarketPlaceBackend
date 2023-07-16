@@ -36,6 +36,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'json']], fun
     Route::get('/get-user', function() {
         return auth()->user();
     });
+    Route::get('/get-referral-earnings', [ProfileController::class, 'getReferralEarnings']);
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::get('/sign-out', [AuthController::class, 'signOut']);

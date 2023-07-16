@@ -14,6 +14,7 @@ class Controller extends BaseController
     public function __construct()
     {
         // $users = User::all();
+        // // dd($users);
         // foreach($users as $key => $value) {
         //     $code1 = $value->id.rand(1000000,9999999);
         //     $code2 = base64_encode($value->id.rand(1000000,9999999));

@@ -8,6 +8,7 @@ use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\ReferralEarn;
 
 class ProfileController extends Controller
 {
@@ -19,6 +20,11 @@ class ProfileController extends Controller
     public function show()
     {
         return new UserResource(auth()->user());
+    }
+
+    public function getReferralEarnings() {
+        $earnings = ReferralEarn::where('user_id', auth()->id())->sum('amount');
+        return $earnings;
     }
 
     /**

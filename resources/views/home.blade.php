@@ -83,7 +83,7 @@
                 </span>
             </div>
             <div class="px-3 py-4 w-[140px] hidden lg:block text-right">
-                <button on:click.prevent="$dispatch('modal', {modelOpen: true, productPrice: '{{ $product->price }}',  url: '{{ route('buy.modal', ['id' => $product->id]) }}'})" type="button" class="text-indigo-700 border border-indigo-700 hover:bg-indigo-700 hover:text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center">
+                <button @click="$dispatch('modal', {modelOpen: true, productPrice: '{{ $product->price }}',  url: '{{ route('buy.modal', ['id' => $product->id]) }}'})" type="button" class="text-indigo-700 border border-indigo-700 hover:bg-indigo-700 hover:text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </button>
             </div>
@@ -107,7 +107,7 @@
     <div x-data="fetchProductOrderView()" x-cloak>
         <template x-on:modal.window="productPrice = $event.detail.productPrice; url = $event.detail.url; modelOpen = $event.detail.modelOpen; fetchView();"></template>
 
-        <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div x-show="modelOpen" class="fixed top-[50px] inset-0 z-[1000] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
                 <div x-cloak @click="closeModal()" x-show="modelOpen"
                     x-transition:enter="transition ease-out duration-300 transform"
