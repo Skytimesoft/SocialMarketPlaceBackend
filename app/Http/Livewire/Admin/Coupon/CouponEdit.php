@@ -22,7 +22,7 @@ class CouponEdit extends Component
         return [
             'coupon.code' => 'required|string|max:64|unique:coupons,code,' . $this->coupon->id,
             'coupon.value' => 'required|numeric',
-            'coupon.limit' => 'nullable|numeric|min:1',
+            'coupon.quantity' => 'nullable|numeric|min:1',
             'status' => 'required',
         ];
     }

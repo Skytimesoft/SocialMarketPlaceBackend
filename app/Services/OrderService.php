@@ -44,6 +44,10 @@ class OrderService
             return $order;
         });
 
+        if (is_null($couponModel) || is_null($couponModel->value) || (int) $couponModel->value <= 0) {
+            return $order;
+        }
+
         $amount = Money::of(strval($order->total_amount), 'USD', new CustomContext(4));
         $totalMoneyObject = $amount->minus($couponModel->value, RoundingMode::UP);
         $order->total_amount = $totalMoneyObject->getAmount();

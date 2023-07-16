@@ -33,7 +33,7 @@ class CouponTable extends DataTableComponent
             Column::make("Id", "id")->hideIf(true),
             Column::make("Code", "code")->searchable(),
             Column::make("Discount Amount", "value"),
-            Column::make("Limit", "limit")
+            Column::make("Quantity", "quantity")
                 ->format(
                     function ($value, $row, Column $column) {
                         if (is_null($value)) {

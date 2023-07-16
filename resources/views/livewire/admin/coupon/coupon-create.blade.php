@@ -45,10 +45,10 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-3 col-form-label">Limit (times)</label>
+                        <label class="col-3 col-form-label">Quantity</label>
                         <div class="col">
-                            <input wire:model.defer="coupon.limit" type="number" class="form-control" min="1" step="1" placeholder="Enter Usage Limit" />
-                            @error('coupon.limit')
+                            <input wire:model.defer="coupon.quantity" type="number" class="form-control" min="1" step="1" placeholder="Enter Available Quantity" />
+                            @error('coupon.quantity')
                             <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
                             @enderror
                         </div>

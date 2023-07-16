@@ -21,7 +21,7 @@ class CouponCreate extends Component
             'coupon.code' => 'required|string|max:64|unique:coupons,code',
             'coupon.value' => 'required|numeric',
             'coupon.is_enabled' => 'required',
-            'coupon.limit' => 'nullable|numeric',
+            'coupon.quantity' => 'nullable|numeric',
         ];
     }
 
